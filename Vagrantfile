@@ -29,8 +29,7 @@ Vagrant.configure("2") do |config|
 
     docker pull ubuntu:trusty
 
-    cd /home/sync
-    make buildDocker
+    docker build -t basis /home/sync/docker_basis
 
     source /home/sync/scripts/install_p4c.sh
     
