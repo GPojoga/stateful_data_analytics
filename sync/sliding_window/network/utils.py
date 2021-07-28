@@ -19,6 +19,11 @@ errnos = { # swa error numbers
 
 
 def print_swa_hdr(pkt):
+    """Print the Sliding Window Header
+
+    Args:
+        pkt (Packet): a packet containing the SWA header
+    """
     print(f"{'=' * 3} {errnos[pkt['SWinAvg'].errno]} {'=' * 3}")
     print(f"OP : {pkt['SWinAvg'].op}")
     print(f"ERRNO : {pkt['SWinAvg'].errno}")

@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   # Provider Settings
   config.vm.provider "virtualbox" do |vb|
-    vb.name = 'swa_p4_dpdk'
+    vb.name = 'sda_p4_dpdk'
     vb.memory = 8192
     vb.cpus = 4
   end
