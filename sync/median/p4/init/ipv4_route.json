@@ -1,0 +1,30 @@
+{
+    "control": "IngressImpl.ipv4",
+    "table_name": "ipv4_route",
+    "entries": [
+        {
+            "match": ["10.0.0.1/32"],
+            "action": "forward",
+            "params": [
+                "00:00:00:00:00:01",
+                "1"
+            ]
+        },
+        {
+            "match": ["10.0.0.2/32"],
+            "action": "forward",
+            "params": [
+                "00:00:00:00:00:02",
+                "2"
+            ]
+        },
+        {
+            "match": ["10.1.1.1/32"],
+            "action": "forward",
+            "params": [
+                "00:00:00:00:01:00",
+                "3"
+            ]
+        }
+    ]
+}

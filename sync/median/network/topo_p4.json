@@ -1,0 +1,65 @@
+{
+    "hosts": [
+        {
+            "name": "d1", 
+            "ip": "10.0.0.1", 
+            "mac": "0:0:0:0:0:1", 
+            "inNamespace": true,
+            "type": "local",
+            "exe": null    
+        },
+        {
+            "name": "h1", 
+            "ip": "10.0.0.2", 
+            "mac": "0:0:0:0:0:2", 
+            "inNamespace": true,
+            "type": "local",
+            "exe": null
+        },
+        {
+            "name": "hc", 
+            "ip": "10.1.1.1", 
+            "mac": "0:0:0:0:1:0", 
+            "inNamespace": false,
+            "type": "local",
+            "exe": "python3 p4/controller.py"
+        }
+    ],
+    "controller" : false,
+    "switches": [
+        {
+            "name": "s1",
+            "type": "p4_simple_switch",
+            "sw_path": "p4/build/main.json",
+            "thrift_port": 9090,
+            "device_id": 0,
+            "init_path": "p4/init"
+        }
+    ],
+    "links": [
+        {
+            "node1": "d1", 
+            "node2": "s1",
+            "port1": 1,
+            "port2": 1,
+            "intfName1": "s1-eth0",
+            "intfName2": "s1-d1"
+        },
+        {
+            "node1": "h1", 
+            "node2": "s1",
+            "port1": 1,
+            "port2": 2,
+            "intfName1": "s1-eth0",
+            "intfName2": "s1-h1"
+        },
+        {
+            "node1": "hc", 
+            "node2": "s1",
+            "port1": 1,
+            "port2": 3,
+            "intfName1": "s1-eth0",
+            "intfName2": "s1-hc"
+        }
+    ]
+}
