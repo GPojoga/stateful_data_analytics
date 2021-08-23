@@ -4,29 +4,29 @@
 
 ---
 
-Make sure that [virtualBox](https://www.virtualbox.org/wiki/Downloads) and [vagrant](https://www.vagrantup.com/downloads) are installed.
+Make sure that [virtualBox](https://www.virtualbox.org/wiki/Downloads) and [vagrant](https://www.vagrantup.com/downloads) are installed (on the host OS). For developing this project we have used virtualbox 6.1.26, vagrant 2.2.14 and, as a host OS, Debian bullseye. However, it is not required that exactly these versions, or host OS, to be used, since these tools are only used for the creation of a virtual machine where the application is executed. 
 
 Install the vagrant plugin [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest). You can do this by running
 ```
-vagrant plugin install vagrant-vbguest
+$ vagrant plugin install vagrant-vbguest
 ```
 
 Now you can build the vagrant box. It will contain all the required dependecies for running the programs. It is a lengthy process. Expect it to take approximately an hour. To build the box run
 ```
-vagrant up
+$ vagrant up
 ```
 
 Once the box is up, you can connect through ssh by running :
 
 ```
-vagrant ssh
+$ vagrant ssh
 ```
 
 Once you are in the virtual OS proceed with the following section (Directory Overview).
 
 In order to stop the virtual OS, you must interrupt the ssh connection and run
 ```
-vagrant halt
+$ vagrant halt
 ```
 
 ## Directory Overview
@@ -56,33 +56,39 @@ The virtual OS contains a shared folder at `/home/sync`, it is connected to the 
 
 #### **Initialize DPDK**
 
-To initialize the network run `make buran_dpdk`. 
+To initialize the network run `$ make buran_dpdk`. 
 Once the network is initialized the Containernet terminal will be waiting for input.
-Now you can open a terminal that controls a client host, by running `xterm h1` in the Containernet CLI.
+Now you can open a terminal that controls a client host, by running `> xterm h1` in the Containernet CLI.
 
 #### **Initialize P4**
-To initialize the network run `make buran_p4`. 
+To initialize the network run `$ make buran_p4`. 
 Once the network is initialized the Containernet terminal will be waiting for input.
-Now you can open a terminal that controls a client host, by running `xterm h1` in the Containernet CLI.
+Now you can open a terminal that controls a client host, by running `> xterm h1` in the Containernet CLI.
 
 #### **Client Host operations :**
-* **Create a flow** : `make create_flow winsize=<the size of the window>`. The response will contain a flow key, which can be used to perform the other operations on the flow.
-* **Add a value** : `make add_value key=<flow key> val=<the value to be added>`
-* **Get result** : `make get_result key=<flow key>`
-* **Remove flow** : `make remove_flow key=<flow key>`
+* **Create a flow** : `$ make create_flow winsize=<the size of the window>`. The response will contain a flow key, which can be used to perform the other operations on the flow.
+* **Add a value** : `$ make add_value key=<flow key> val=<the value to be added>`
+* **Get result** : `$ make get_result key=<flow key>`
+* **Remove flow** : `$ make remove_flow key=<flow key>`
 
 #### **Example**
 Run :
 ```
-make buran_dpdk
+$ make buran_dpdk
 ```
 In the containernet CLI run :
 ```
-xterm h1
+> xterm h1
 ```
 The following communication takes place in the h1 terminal
 
-**Request** `make create_flow winsize=5`
+---
+
+**Request** 
+```
+$ make create_flow winsize=5
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 0
@@ -94,7 +100,14 @@ WINSIZE : 5
 
 The flow key is 0x972608fb
 ```
-**Request** `make add_value key=972608fb val=3`
+
+---
+
+**Request** 
+```
+$ make add_value key=972608fb val=3
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 1
@@ -104,7 +117,14 @@ VAL : 2
 WINSIZE : 0
 ==========
 ```
-**Request** `make get_result key=972608fb`
+
+---
+
+**Request** 
+```
+$ make get_result key=972608fb
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 2
@@ -119,7 +139,14 @@ sum : 3
 winsize : 5
 ================
 ```
-**Request** `make remove_flow key=972608fb`
+
+---
+
+**Request** 
+```
+$ make remove_flow key=972608fb
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 3
@@ -129,6 +156,8 @@ VAL : 0
 WINSIZE : 0
 ==========
 ```
+
+---
 
 ## Median
 ---
@@ -143,33 +172,39 @@ The file structure is similar to the sliding window average i.e.,
 
 #### **Initialize DPDK**
 
-To initialize the network run `make buran_dpdk`. 
+To initialize the network run `$ make buran_dpdk`. 
 Once the network is initialized the Containernet terminal will be waiting for input.
-Now you can open a terminal that controls a client host, by running `xterm h1` in the Containernet CLI.
+Now you can open a terminal that controls a client host, by running `> xterm h1` in the Containernet CLI.
 
 #### **Initialize P4**
-To initialize the network run `make buran_p4`. 
+To initialize the network run `$ make buran_p4`. 
 Once the network is initialized the Containernet terminal will be waiting for input.
-Now you can open a terminal that controls a client host, by running `xterm h1` in the Containernet CLI.
+Now you can open a terminal that controls a client host, by running `> xterm h1` in the Containernet CLI.
 
 #### **Client Host operations :**
-* **Create a flow** : `make create_flow vals=<list of values separated by comma>`. The response will contain a flow key, which can be used to perform the other operations on the flow.
-* **Add a value** : `make add_value key=<flow key> val=<the value to be added>`
-* **Get result** : `make get_result key=<flow key>`
-* **Remove flow** : `make remove_flow key=<flow key>`
+* **Create a flow** : `$ make create_flow vals=<list of values separated by comma>`. The response will contain a flow key, which can be used to perform the other operations on the flow.
+* **Add a value** : `$ make add_value key=<flow key> val=<the value to be added>`
+* **Get result** : `$ make get_result key=<flow key>`
+* **Remove flow** : `$ make remove_flow key=<flow key>`
 
 #### **Example**
 Run :
 ```
-make buran_p4
+$ make buran_p4
 ```
 In the containernet CLI run :
 ```
-xterm h1
+> xterm h1
 ```
 The following communication takes place in the h1 terminal
 
-**Request** `make create_flow vals=1,3,4,7`
+---
+
+**Request** 
+```
+# make create_flow vals=1,3,4,7
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 0
@@ -189,7 +224,13 @@ Val : 7
 ++++++++++
 The flow key is 0xfe5a6222
 ```
-**Request** `make add_value key=fe5a6222 val=3`
+---
+
+**Request** 
+```
+# make add_value key=fe5a6222 val=3
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 1
@@ -199,7 +240,13 @@ VAL : 3
 WINSIZE : 0
 ==========
 ```
-**Request** `make get_result key=fe5a6222`
+---
+
+**Request** 
+```
+# make get_result key=fe5a6222
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 2
@@ -210,7 +257,13 @@ WINSIZE : 0
 ==========
 The median is 3
 ```
-**Request** `make remove_flow key=fe5a6222`
+---
+
+**Request** 
+```
+# make remove_flow key=fe5a6222
+```
+**Response**
 ```
 === SUCCESS ===
 OP : 3
@@ -220,3 +273,4 @@ VAL : 0
 WINSIZE : 0
 ==========
 ```
+---
