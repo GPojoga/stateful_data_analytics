@@ -50,9 +50,11 @@ The virtual OS contains a shared folder at `/home/sync`, it is connected to the 
 ### Network
 
 * **DPDK** : The dpdk network is described in `sync/sliding_window/network/topo_dpdk.json`. `d1` is a docker container running the dpdk implementation of the algorithm and `h1` is a Containernet host.
-* **P4** : The P4 network is described in `sync/sliding_window/network/topo_p4.json`. `d1` and `h1` are Containernet hosts, `hc` acts as a controller, and is in the namespace as the switch. The switch `s1` is a bmv2 simple switch that executes the P4 program defined in 'sync/sliding_window/p4/bmv2'
+* **P4** : The P4 network is described in `sync/sliding_window/network/topo_p4.json`. `d1` and `h1` are Containernet hosts, `hc` acts as a controller, and is in the same namespace as the switch. The switch `s1` is a bmv2 simple switch that executes the P4 program defined in 'sync/sliding_window/p4/bmv2'
 
 ### Usage
+
+Note : the commands presented in this section must be executed in `sync/sliding_window`, unless specified otherwise.
 
 #### **Initialize DPDK**
 
@@ -169,6 +171,8 @@ The file structure is similar to the sliding window average i.e.,
 * `p4` : Here is located the P4 implementation of the algorithm. The P4 program is located in the folder `bmv2` and the table initialization in `init`. The controller is defined in `controller.py`
 
 ### Usage
+
+Note : the commands presented in this section must be executed in `sync/median`, unless specified otherwise.
 
 #### **Initialize DPDK**
 

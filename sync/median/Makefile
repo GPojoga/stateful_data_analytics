@@ -7,6 +7,7 @@ build_p4:
 run_p4:
 	sudo python3 ../network/net.py network/topo_p4.json
 
+# build + run = buran :)
 buran_p4: build_p4 run_p4
 
 # ==== DPDK ====

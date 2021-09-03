@@ -10,6 +10,7 @@ buildDocker:
 run_dpdk:
 	sudo python3 ../network/net.py network/topo_dpdk.json
 
+# build + run = buran :)
 buran_dpdk: updateDocker run_dpdk
 
 # ==================
